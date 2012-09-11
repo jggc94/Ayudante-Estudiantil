@@ -11,6 +11,9 @@
     <string name="hintCuerpoTexto">Texto</string>
     <string name="agregar">Agregar</string>
     <string name="fecha">Fecha</string>
+    <string name="titulo">Titulo</string>
+    <string name="tarea">Tarea</string>
+    <string name="fecha">Fecha</string>
     
     <!-- Otros -->
     <string name="contentDescriptionBoton">Boton</string>

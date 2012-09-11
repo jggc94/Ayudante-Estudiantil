@@ -68,7 +68,6 @@ public class AgregarActivity extends Activity
 					ent.setValue("FECHA", fechaString);
 					ent.save();
 					
-					crearHeaderTabla();
 					cargarDatos();
 					Toast.makeText(contexto, "Tarea Agregada!!!", Toast.LENGTH_SHORT).show();
 				}
@@ -96,50 +95,16 @@ public class AgregarActivity extends Activity
         updateDisplay();
         
 		tabla = (TableLayout) findViewById(R.id.tablelayoutVer);
-		crearHeaderTabla();
 		cargarDatos();
 		
 	}
 
-    public void crearHeaderTabla()
-    {
-    	tabla.removeAllViews();
-    	
-      	row = new TableRow(contexto);
-
-        titulo = new TextView(contexto);
-        titulo.setWidth(100);
-        titulo.setText(getString(R.string.hintTitulo));
-        titulo.setTextSize(12);
-        titulo.setTextColor(Color.WHITE);
-        titulo.setBackgroundColor(Color.parseColor("#DD5400"));
-        titulo.setGravity(Gravity.CENTER);
-        
-      	texto = new TextView(contexto);
-      	texto.setWidth(100);
-      	texto.setText(getString(R.string.hintCuerpoTexto));
-      	texto.setTextSize(12);
-      	texto.setTextColor(Color.WHITE);
-      	texto.setBackgroundColor(Color.parseColor("#FF9C00"));
-      	texto.setGravity(Gravity.CENTER);
-        
-      	fecha = new TextView(contexto);
-      	fecha.setWidth(100);
-        fecha.setText("Fecha");
-        fecha.setTextSize(12);
-        fecha.setWidth(100);
-        fecha.setTextColor(Color.WHITE);
-        fecha.setBackgroundColor(Color.parseColor("#DD5400"));
-        fecha.setGravity(Gravity.CENTER);
-        
-        row.addView(titulo);
-        row.addView(texto);
-        row.addView(fecha);
-        tabla.addView(row);
-    }
-    
     public void cargarDatos()
     {
+    	for (int i = 1; i < tabla.getChildCount(); i++) 
+    	{
+    		tabla.removeViewAt(i);
+		}
     	 List<Entity> list = DataFramework.getInstance().getEntityList("tarea");
          @SuppressWarnings("rawtypes")
          Iterator iter = list.iterator();
