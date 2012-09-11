@@ -1,0 +1,21 @@
+<resources>
+
+    <string name="app_name">Ayudante Estudiantil</string>
+    <string name="exit">Exit</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    
+    <!-- Panel Agregar -->
+    <string name="nuevatarea">Nueva Tarea</string>
+    <string name="hintTitulo">Titulo</string>
+    <string name="hintCuerpoTexto">Texto</string>
+    <string name="agregar">Agregar</string>
+    <string name="fecha">Fecha</string>
+    
+    <!-- Otros -->
+    <string name="contentDescriptionBoton">Boton</string>
+    <string name="contentDescriptionImagen">Imagen</string>
+    <string name="cargando">Cargando&#8230;</string>
+    <string name="errorAbriendoBD">Error abriendo la base datos</string>
+    
+</resources>

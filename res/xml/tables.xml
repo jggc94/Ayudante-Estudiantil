@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<database
+    name="ayudante_db"
+    version="1" >
+
+    <table
+        name="tarea"
+        to-string="%titulo%" >
+        <field
+            name="TITULO"
+            type="text"
+            size="100" />
+        <field
+            name="TEXTO"
+            type="text"
+            size="10000" />
+        <field
+            name="FECHA"
+            type="text"
+            size="11" />                                                            
+    </table>
+</database>

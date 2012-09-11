@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+        
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dip"
+        android:text="@string/nuevatarea"
+        android:textSize="18dip" />
+
+    <EditText
+		android:id="@+id/fieldTitulo"
+		android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hintTitulo"
+        android:gravity="center" />
+
+	<EditText
+    	android:id="@+id/fieldTexto"
+        android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:hint="@string/hintCuerpoTexto"
+		android:inputType="textMultiLine" />
+
+	<Button
+	    android:id="@+id/btnFecha"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="@string/fecha"
+	    android:layout_gravity="center" />
+
+	<Button
+	    android:id="@+id/btnAgregarNueva"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="@string/agregar"
+	    android:layout_gravity="center" />
+
+    <HorizontalScrollView 
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content">
+		<TableLayout
+	        android:id="@+id/tablelayoutVer"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:padding="5dp">
+	
+	    </TableLayout>
+	</HorizontalScrollView>	    
+
+</LinearLayout>
+</ScrollView>
