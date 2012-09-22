@@ -14,11 +14,21 @@
     <string name="titulo">Titulo</string>
     <string name="tarea">Tarea</string>
     <string name="fecha">Fecha</string>
+    <string name="tareaAgregada">Tarea Agregada!!!</string>
+    <string name="fechaSeleccionada">La Fecha seleccionada es: </string>
+    <string name="enunciadoTarea">La Tarea es : </string>
+    
     
     <!-- Otros -->
     <string name="contentDescriptionBoton">Boton</string>
     <string name="contentDescriptionImagen">Imagen</string>
     <string name="cargando">Cargando&#8230;</string>
     <string name="errorAbriendoBD">Error abriendo la base datos</string>
+    <string name="error">Error</string>
+    <string name="si">Si</string>
+    <string name="no">No</string>
+    <string name="relleneCampos">Rellene todos los campos</string>
+    <string name="eliminar">Eliminar</string>
+    <string name="eliminarMensaje">Desea eliminar pregunta numero </string>
     
 </resources>

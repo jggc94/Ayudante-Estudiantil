@@ -43,7 +43,8 @@ public class MainActivity extends Activity {
 			}
 		});
         
-        try {
+        try 
+        {
 			DataFramework.getInstance().open(contexto, getPackageName());
 		} catch (XmlPullParserException e) 
 		{
@@ -52,8 +53,9 @@ public class MainActivity extends Activity {
 		{
 			Toast.makeText(getApplicationContext(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
 		}
+        
 //        dialog = new ProgressDialog(contexto);
-//		dialog.setMessage(getString(R.string.cargando));
+//        dialog.setMessage(getString(R.string.cargando));
 //		dialog.setCancelable(false);
 //		new ProgressAbriendo().execute();
     }
