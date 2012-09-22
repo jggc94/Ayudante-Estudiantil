@@ -2,6 +2,8 @@ package com.ayudante.estudiantil;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
+import java.util.List;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -23,6 +25,8 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.dataframework.DataFramework;
+import com.android.dataframework.Entity;
 import com.ayudante.estudiantil.mundo.Ayudante;
 import com.ayudante.estudiantil.mundo.Tarea;
 
@@ -42,7 +46,6 @@ public class AgregarActivity extends Activity
 	private TextView lblTitulo,lblTexto,lblFecha;
 	private Context contexto;
 	private Ayudante ayudante;
-	private ArrayList<Tarea> tareas;
 	private Calendar calendario;
 	
 	@Override
@@ -51,8 +54,10 @@ public class AgregarActivity extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.agregar_activity);
 		
-		contexto = getApplicationContext();
+		contexto = this;
 		ayudante = new Ayudante();
+		tabla = (TableLayout) findViewById(R.id.tablelayoutVer);
+		cargarDatos();
 		
 		fieldTitulo = (EditText) findViewById(R.id.fieldTitulo);
 		fieldTexto = (EditText) findViewById(R.id.fieldTexto);
@@ -66,14 +71,25 @@ public class AgregarActivity extends Activity
 				{
 					try 
 					{
-						ayudante.agregarPregunta(fieldTitulo.getText().toString(), fieldTexto.getText().toString(), fecha);
+						int y = ayudante.agregarPregunta(fieldTitulo.getText().toString(), fieldTexto.getText().toString(), fecha);
+
+				    	if(y == 1)
+				    	{
+							cargarDatos();
+							fieldTitulo.setText("");
+							fieldTexto.setText("");
+							Toast.makeText(contexto, getString(R.string.tareaAgregada), Toast.LENGTH_SHORT).show();		
+				    	}
+				    	else
+				    	{
+				    		Toast.makeText(contexto, getString(R.string.error), Toast.LENGTH_SHORT).show();
+				    	}
 					} catch (Exception e) 
 					{
 						Toast.makeText(contexto, getString(R.string.error)+ " : " + e.getMessage() , Toast.LENGTH_SHORT).show();
 					}
 					
-					cargarDatos();
-					Toast.makeText(contexto, getString(R.string.tareaAgregada), Toast.LENGTH_SHORT).show();
+					
 				}
 				else
 				{
@@ -99,8 +115,8 @@ public class AgregarActivity extends Activity
         
         updateDisplay();
         
-        tabla = (TableLayout) findViewById(R.id.tablelayoutVer);
-		cargarDatos();
+        
+		
 		
 	}
 
@@ -109,17 +125,24 @@ public class AgregarActivity extends Activity
 	 */
     public void cargarDatos()
     {
-    	for (int i = 1; i < tabla.getChildCount(); i++) 
-    	{
-    		tabla.removeViewAt(i);
+    	tabla.removeViews(1, tabla.getChildCount()-1);
+
+    	List<Entity> list = DataFramework.getInstance().getEntityList("tarea");
+		@SuppressWarnings("rawtypes")
+		Iterator iter = list.iterator();
+		
+		ArrayList<Tarea> preguntas = new ArrayList<Tarea>();
+		
+		// Mientras exista uno mas
+		while (iter.hasNext()) 
+		{
+			Entity  entityCargar = (Entity)iter.next();
+			String tituloP = entityCargar.getString("TITULO");
+			String textoP = entityCargar.getString("TEXTO");
+			String fechaP = entityCargar.getString("FECHA");
+         	
+			rellenarTablaConRows(tituloP, textoP, fechaP,entityCargar.getId());
 		}
-         
-    	tareas = ayudante.cargarArchivos();
-    	
-    	for (int i = 0; i < tareas.size(); i++) 
-    	{
-    		rellenarTablaConRows(tareas.get(i).getTitulo(), tareas.get(i).getTexto(), tareas.get(i).getFecha());
-    	}
     }
     
     /**
@@ -128,10 +151,10 @@ public class AgregarActivity extends Activity
      * @param textoP	- Texto de la tarea
      * @param fechaP	- Fecha de entrega de la tarea 
      */
-    public void rellenarTablaConRows(final String tituloP, final String textoP, final String fechaP)
-    {	
+    public void rellenarTablaConRows(final String tituloP, final String textoP, final String fechaP, final long id)
+    {	    	
     	row = new TableRow(contexto);
-     	
+    	
     	lblTitulo = new TextView(contexto);
     	lblTitulo.setWidth(100);
         lblTitulo.setText(tituloP);
@@ -172,8 +195,8 @@ public class AgregarActivity extends Activity
 			{
 				new AlertDialog.Builder(contexto)
 		        .setIcon(android.R.drawable.ic_dialog_alert)
-		        .setTitle(R.string.eliminar)
-		        .setMessage(R.string.eliminarMensaje + " "+row.getId())
+		        .setTitle(getString(R.string.eliminar))
+		        .setMessage(getString(R.string.eliminarMensaje) + " "+ id + " : " + tituloP)
 		        .setPositiveButton(R.string.si, new DialogInterface.OnClickListener() 
 		        {
 		        	// Al darle click en si, se elimina
@@ -181,7 +204,7 @@ public class AgregarActivity extends Activity
 		            {
 		            	try 
 		            	{
-							ayudante.eliminarTarea(tituloP,textoP,fechaP,row.getId());
+							ayudante.eliminarTarea(tituloP,textoP,fechaP,id);
 							cargarDatos();
 						} catch (Exception e) 
 						{

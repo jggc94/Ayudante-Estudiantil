@@ -13,10 +13,7 @@ import com.android.dataframework.DataFramework;
 import com.android.dataframework.Entity;
 
 public class Ayudante 
-{
-	private Entity entity;
-	private ArrayList<Tarea> preguntas;
-	
+{	
 	public Ayudante()
 	{
 		
@@ -47,7 +44,7 @@ public class Ayudante
 	
 	public Tarea buscarPregunta(String titulo,String texto, String fecha) throws Exception
 	{
-		List<Entity> list = DataFramework.getInstance().getEntityList("tarea", "TITULO = " + titulo);
+		List<Entity> list = DataFramework.getInstance().getEntityList("tarea", "TITULO = '" + titulo+ "'");
         @SuppressWarnings("rawtypes")
         Iterator iter = list.iterator();
         Tarea tBuscada = null;
@@ -75,11 +72,11 @@ public class Ayudante
 	 */			
 	public int agregarPregunta(String titulo,String texto, String fecha) throws Exception
 	{
-		entity = new Entity("tarea");
-		entity.setValue("TITULO", titulo);
-		entity.setValue("TEXTO", texto);
-		entity.setValue("FECHA", fecha);
-		entity.save();
+		Entity entityAgregar = new Entity("tarea");
+		entityAgregar.setValue("TITULO", titulo);
+		entityAgregar.setValue("TEXTO", texto);
+		entityAgregar.setValue("FECHA", fecha);
+		entityAgregar.save();
 		
 		Tarea tBuscada = buscarPregunta(titulo, texto, fecha);
 		
@@ -100,15 +97,15 @@ public class Ayudante
 		@SuppressWarnings("rawtypes")
 		Iterator iter = list.iterator();
 		
-		preguntas = new ArrayList<Tarea>();
+		ArrayList<Tarea> preguntas = new ArrayList<Tarea>();
 		
 		// Mientras exista uno mas
 		while (iter.hasNext()) 
 		{
-			entity = (Entity)iter.next();
-			String tituloP = entity.getString("TITULO");
-			String textoP = entity.getString("TEXTO");
-			String fechaP = entity.getString("FECHA");
+			Entity  entityCargar = (Entity)iter.next();
+			String tituloP = entityCargar.getString("TITULO");
+			String textoP = entityCargar.getString("TEXTO");
+			String fechaP = entityCargar.getString("FECHA");
          	
 			Tarea tareaI = new Tarea(tituloP, textoP, fechaP);
 			preguntas.add(tareaI);
@@ -119,7 +116,7 @@ public class Ayudante
 
 	public void eliminarTarea(String tituloP, String textoP, String fechaP,long id) throws Exception
 	{
-		entity = new Entity("categoria", id);
-		entity.delete();
+		Entity entityEliminar = new Entity("tarea", id);
+		entityEliminar.delete();
 	}
 }
