@@ -22,7 +22,8 @@
         </activity>
         
         <activity android:name=".AgregarActivity"
-				  android:configChanges="keyboard|keyboardHidden|orientation"></activity>
+				  android:configChanges="keyboard|keyboardHidden|orientation"
+				  android:windowSoftInputMode="stateUnchanged"></activity>
     </application>
 
 </manifest>

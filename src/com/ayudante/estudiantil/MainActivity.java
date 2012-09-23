@@ -11,8 +11,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
@@ -59,21 +57,6 @@ public class MainActivity extends Activity {
 //		dialog.setCancelable(false);
 //		new ProgressAbriendo().execute();
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main_activity, menu);
-        return true;
-    }
-    
-    public boolean onOptionsItemSelected(MenuItem item) 
-	{	
-    	if(item.getItemId() == R.id.exit)
-		{
-			finish();
-		}
-		return true;
-	}
 	
     public class ProgressAbriendo extends AsyncTask<Void, Integer, Void>
 	{

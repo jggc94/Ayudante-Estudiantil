@@ -1,6 +1,5 @@
 package com.ayudante.estudiantil;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
@@ -28,7 +27,6 @@ import android.widget.Toast;
 import com.android.dataframework.DataFramework;
 import com.android.dataframework.Entity;
 import com.ayudante.estudiantil.mundo.Ayudante;
-import com.ayudante.estudiantil.mundo.Tarea;
 
 public class AgregarActivity extends Activity
 {
@@ -131,8 +129,6 @@ public class AgregarActivity extends Activity
 		@SuppressWarnings("rawtypes")
 		Iterator iter = list.iterator();
 		
-		ArrayList<Tarea> preguntas = new ArrayList<Tarea>();
-		
 		// Mientras exista uno mas
 		while (iter.hasNext()) 
 		{
@@ -154,6 +150,7 @@ public class AgregarActivity extends Activity
     public void rellenarTablaConRows(final String tituloP, final String textoP, final String fechaP, final long id)
     {	    	
     	row = new TableRow(contexto);
+    	row.setMinimumHeight(40);
     	
     	lblTitulo = new TextView(contexto);
     	lblTitulo.setWidth(100);
@@ -196,7 +193,7 @@ public class AgregarActivity extends Activity
 				new AlertDialog.Builder(contexto)
 		        .setIcon(android.R.drawable.ic_dialog_alert)
 		        .setTitle(getString(R.string.eliminar))
-		        .setMessage(getString(R.string.eliminarMensaje) + " "+ id + " : " + tituloP)
+		        .setMessage(getString(R.string.eliminarMensaje) + " : " + tituloP)
 		        .setPositiveButton(R.string.si, new DialogInterface.OnClickListener() 
 		        {
 		        	// Al darle click en si, se elimina
